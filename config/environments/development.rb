@@ -1,6 +1,14 @@
 WpcampApi::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  silence_warnings do
+    begin
+      require 'pry'
+      IRB = Pry
+    rescue LoadError
+    end
+  end
+
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
