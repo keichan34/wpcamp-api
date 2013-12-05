@@ -11,9 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20131205150632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "metadata", force: true do |t|
+    t.string "key",   null: false
+    t.text   "value"
+  end
+
+  add_index "metadata", ["key"], name: "index_metadata_on_key", unique: true, using: :btree
+
+  create_table "word_camps", force: true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.string   "address"
+    t.date     "start"
+    t.date     "end"
+    t.string   "guid",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "word_camps", ["created_at"], name: "index_word_camps_on_created_at", using: :btree
+  add_index "word_camps", ["guid"], name: "index_word_camps_on_guid", unique: true, using: :btree
 
 end

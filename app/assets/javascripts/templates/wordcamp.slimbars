@@ -1,0 +1,3 @@
+li data={ id: "{{id}}" }
+  a href="{{url}}"
+    | {{title}}

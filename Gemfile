@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 ruby '2.1.0', engine: 'rbx', engine_version: '2.2.1'
 
+gem 'nokogiri'
+
 platforms :rbx do
   gem "rubysl", "~> 2.0"
   gem 'racc'
@@ -31,9 +33,16 @@ gem 'pg'
   gem 'jquery-rails'
 
   # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-  gem 'turbolinks'
+  # gem 'turbolinks'
+
+  gem 'js-routes'
 
   gem 'asset_sync'
+  gem 'unf'
+
+# Set the internal timezone to the user's timezone
+gem 'browser-timezone-rails'
+gem 'handlebars_assets'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
@@ -53,6 +62,13 @@ gem 'bootstrap-sass', '~> 3.0.1.0.rc'
 gem 'newrelic_rpm'
 
 gem 'dalli'
+
+gem 'thread'
+
+gem 'rabl'
+gem 'oj'
+
+gem 'kaminari'
 
 group :production do
   # For Heroku
