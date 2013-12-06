@@ -8,18 +8,15 @@ class Importer::WordcampCentral
   end
 
   def run args={}
-    # require 'thread/pool'
-
     args = {
       max_pages: 10
     }.merge args
 
     @max_pages = args[:max_pages]
-    @pool = Thread.pool 4
 
     time_started = Time.now.utc
 
-    if last_fetch_time = nil # Metadata['wordcamp_central_last_fetch_time']
+    if last_fetch_time = Metadata['wordcamp_central_last_fetch_time']
       last_fetch_time = Time.parse(last_fetch_time).utc
     else
       last_fetch_time = 20.years.ago.utc
@@ -33,8 +30,6 @@ class Importer::WordcampCentral
     if lastBuildDate and lastBuildDate >= last_fetch_time
       process_doc doc
     end
-
-    @pool.shutdown
 
     Metadata['wordcamp_central_last_fetch_time'] = time_started.to_s
 
