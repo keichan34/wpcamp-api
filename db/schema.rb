@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131205150632) do
+ActiveRecord::Schema.define(version: 20131206005541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,12 +29,17 @@ ActiveRecord::Schema.define(version: 20131205150632) do
     t.string   "address"
     t.date     "start"
     t.date     "end"
-    t.string   "guid",       null: false
+    t.string   "guid",                   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "thumbnail_file_name"
+    t.string   "thumbnail_content_type"
+    t.integer  "thumbnail_file_size"
+    t.datetime "thumbnail_updated_at"
   end
 
   add_index "word_camps", ["created_at"], name: "index_word_camps_on_created_at", using: :btree
   add_index "word_camps", ["guid"], name: "index_word_camps_on_guid", unique: true, using: :btree
+  add_index "word_camps", ["start"], name: "index_word_camps_on_start", using: :btree
 
 end

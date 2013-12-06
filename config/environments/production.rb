@@ -77,4 +77,17 @@ WpcampApi::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # Paperclip
+  config.paperclip_defaults = {
+    storage: :s3,
+    s3_credentials: {
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+    },
+    bucket: ENV['FOG_DIRECTORY'],
+    s3_host_name: ENV['FOG_REGION'],
+    url: ":bucket",
+    path: "/:class/:attachment/:id_partition/:style/:filename"
+  }
 end

@@ -64,6 +64,12 @@ class Importer::WordcampCentral
 
           wc.url = doc.css('.wc-single-website').first.attributes['href'].value rescue nil
 
+          image_uri = doc.css('.wc-single-website > img').first.attributes['src'].value rescue nil
+          if image_uri and (!wc.thumbnail? or (wc.thumbnail_updated_at and wc.thumbnail_updated_at <= 1.week.ago))
+            image_uri.gsub! /\?.*?$/, ''
+            wc.thumbnail = URI.parse image_uri
+          end
+
           doc.css('.wc-single-info').children.each_with_index do |child, i|
             content = doc.css('.wc-single-info').children[i+1].text.strip rescue ''
             if child.text.strip == 'Date'

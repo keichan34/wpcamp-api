@@ -70,6 +70,9 @@ gem 'oj'
 
 gem 'kaminari'
 
+gem 'aws-sdk'
+gem 'paperclip'
+
 group :production do
   # For Heroku
   gem 'rails_12factor'

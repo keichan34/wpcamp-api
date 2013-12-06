@@ -6,3 +6,7 @@ node :dates do |object|
     :end => object.end
   }
 end
+
+node :thumbnail do |object|
+  Hash[ [:original, :thumb ].map { |e| [e, object.thumbnail.url(e)] } ]
+end
