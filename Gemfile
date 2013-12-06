@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-ruby '2.1.0', engine: 'rbx', engine_version: '2.2.1'
+ruby '2.0.0'
+# ruby '2.1.0', engine: 'rbx', engine_version: '2.2.1'
 
 gem 'nokogiri'
 
@@ -49,7 +50,8 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem 'puma'
+# gem 'puma'
+gem 'unicorn'
 
 gem 'devise', '~> 3.1.1'
 
