@@ -55,7 +55,7 @@ WpcampApi::Application.configure do
   config.cache_store = :dalli_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
-  config.action_controller.asset_host = "//s3-ap-northeast-1.amazonaws.com/#{ENV['FOG_DIRECTORY']}"
+  config.action_controller.asset_host = "//s3-#{ENV['FOG_REGION']}.amazonaws.com/#{ENV['FOG_DIRECTORY']}"
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
@@ -86,7 +86,7 @@ WpcampApi::Application.configure do
       secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
     },
     bucket: ENV['FOG_DIRECTORY'],
-    s3_host_name: ENV['FOG_REGION'],
+    s3_host_name: "s3-#{ENV['FOG_REGION']}.amazonaws.com",
     url: ":bucket",
     path: "/:class/:attachment/:id_partition/:style/:filename"
   }
