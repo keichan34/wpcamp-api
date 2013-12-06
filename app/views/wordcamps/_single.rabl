@@ -8,5 +8,5 @@ node :dates do |object|
 end
 
 node :thumbnail do |object|
-  Hash[ [:original, :thumb ].map { |e| [e, object.thumbnail.url(e)] } ]
+  Hash[ [:original, :thumb ].map { |e| [e, asset_url(object.thumbnail.url(e))] } ]
 end

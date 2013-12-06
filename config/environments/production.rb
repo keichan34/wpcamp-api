@@ -90,6 +90,6 @@ WpcampApi::Application.configure do
     url: ":bucket",
     s3_protocol: 'https',
     path: "/:class/:attachment/:id_partition/:style/:filename",
-    default_url: -> (attachment) { ActionController::Base.helpers.asset_url "/#{attachment.instance.class.to_s.underscore.pluralize}/#{attachment.name.to_s.pluralize}/thumb_missing.png" }
+    default_url: ":class/:attachment/:style_missing.png"
   }
 end
