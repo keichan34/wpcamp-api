@@ -6,6 +6,14 @@
 #wordcamps {
   margin-top: 60px;
 
+  .page-placemarker {
+    position: relative;
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    float: left;
+  }
+
   .wordcamp-tile {
     padding: 10px;
 
