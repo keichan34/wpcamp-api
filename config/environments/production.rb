@@ -88,6 +88,7 @@ WpcampApi::Application.configure do
     bucket: ENV['FOG_DIRECTORY'],
     s3_host_name: "s3-#{ENV['FOG_REGION']}.amazonaws.com",
     url: ":bucket",
+    s3_protocol: 'https',
     path: "/:class/:attachment/:id_partition/:style/:filename",
     default_url: -> (attachment) { ActionController::Base.helpers.asset_url "/#{attachment.instance.class.to_s.underscore.pluralize}/#{attachment.name.to_s.pluralize}/thumb_missing.png" }
   }
