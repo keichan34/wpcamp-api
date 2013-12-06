@@ -37,6 +37,7 @@ WpcampApi::Application.configure do
 
   # Paperclip
   config.paperclip_defaults = {
-    path: ":rails_root/public/system/:class/:attachment/:id_partition/:style/:filename"
+    path: ":rails_root/public/system/:class/:attachment/:id_partition/:style/:filename",
+    default_url: "/assets/:class/:attachment/:style_missing.png"
   }
 end

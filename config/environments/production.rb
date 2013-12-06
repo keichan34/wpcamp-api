@@ -88,6 +88,7 @@ WpcampApi::Application.configure do
     bucket: ENV['FOG_DIRECTORY'],
     s3_host_name: "s3-#{ENV['FOG_REGION']}.amazonaws.com",
     url: ":bucket",
-    path: "/:class/:attachment/:id_partition/:style/:filename"
+    path: "/:class/:attachment/:id_partition/:style/:filename",
+    default_url: "#{config.action_controller.asset_host}/assets/:class/:attachment/:style_missing.png"
   }
 end
