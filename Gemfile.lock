@@ -41,6 +41,9 @@ GEM
       jquery-rails
       rails (>= 3.1)
     builder (3.1.4)
+    byebug (2.4.1)
+      columnize (~> 0.3.6)
+      debugger-linecache (~> 1.2.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.3)
@@ -53,7 +56,9 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    columnize (0.3.6)
     dalli (2.6.4)
+    debugger-linecache (1.2.0)
     devise (3.1.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -411,6 +416,7 @@ DEPENDENCIES
   aws-sdk
   bootstrap-sass (~> 3.0.1.0.rc)
   browser-timezone-rails
+  byebug
   coffee-rails (~> 4.0.0)
   dalli
   devise (~> 3.1.1)

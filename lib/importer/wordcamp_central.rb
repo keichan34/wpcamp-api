@@ -8,7 +8,7 @@ class Importer::WordcampCentral
   end
 
   def run args={}
-    require 'thread/pool'
+    # require 'thread/pool'
 
     args = {
       max_pages: 10
@@ -19,7 +19,7 @@ class Importer::WordcampCentral
 
     time_started = Time.now.utc
 
-    if last_fetch_time = Metadata['wordcamp_central_last_fetch_time']
+    if last_fetch_time = nil # Metadata['wordcamp_central_last_fetch_time']
       last_fetch_time = Time.parse(last_fetch_time).utc
     else
       last_fetch_time = 20.years.ago.utc
@@ -36,7 +36,7 @@ class Importer::WordcampCentral
 
     @pool.shutdown
 
-    # Metadata['wordcamp_central_last_fetch_time'] = time_started.to_s
+    Metadata['wordcamp_central_last_fetch_time'] = time_started.to_s
 
   end
 
@@ -59,33 +59,48 @@ class Importer::WordcampCentral
         wc.title = item.xpath('title').text.strip
 
         url = item.xpath('link').text.strip
-        @pool.process do
-          doc = Nokogiri::HTML open(url)
 
-          wc.url = doc.css('.wc-single-website').first.attributes['href'].value rescue nil
+        doc = Nokogiri::HTML open(url)
 
-          image_uri = doc.css('.wc-single-website > img').first.attributes['src'].value rescue nil
-          if image_uri and (!wc.thumbnail? or (wc.thumbnail_updated_at and wc.thumbnail_updated_at <= 1.week.ago))
-            image_uri.gsub! /\?.*?$/, ''
-            wc.thumbnail = URI.parse image_uri
-          end
+        wc.url = doc.css('.wc-single-website').first.attributes['href'].value rescue nil
 
-          doc.css('.wc-single-info').children.each_with_index do |child, i|
-            content = doc.css('.wc-single-info').children[i+1].text.strip rescue ''
-            if child.text.strip == 'Date'
-              if /^(?<month>.*?)\s+(?<day_from>\d{1,2})(-(?<day_to>\d{1,2}))?\s*,?\s*(?<year>\d{4})$/ =~ content
-                wc.start = Date.parse "#{ month } #{ day_from }, #{ year }"
-
-                wc.end = Date.parse "#{ month } #{ day_to }, #{ year }" if day_to
-              end
-            elsif child.text.strip == 'Location'
-              wc.address = content
-            end
-          end
-
-          wc.save!
+        image_uri = doc.css('.wc-single-website > img').first.attributes['src'].value rescue nil
+        if image_uri and (!wc.thumbnail? or (wc.thumbnail_updated_at and wc.thumbnail_updated_at <= 1.week.ago))
+          image_uri.gsub! /\?.*?$/, ''
+          wc.thumbnail = URI.parse image_uri
         end
 
+        cursor = nil
+        attrs = {}
+        doc.css('.wc-single-info').children.each do |child|
+          # start a new cursor
+          if child['class'] == 'wc-single-label'
+            cursor = child.text.downcase.to_sym
+            attrs[cursor] = []
+          elsif cursor != nil
+            attrs[cursor] << child
+          end
+        end
+
+        attrs = Hash[attrs.map { |key, value| [key, value.map { |e| e.text }.join('').strip.gsub(/\s+/, ' ') ] }]
+
+        if content = attrs[:date]
+          if /^(?<month>.*?)\s+(?<day_from>\d{1,2})(-(?<day_to>\d{1,2}))?\s*,?\s*(?<year>\d{4})$/ =~ content
+            wc.start = Date.parse "#{ month } #{ day_from }, #{ year }"
+
+            if day_to
+              wc.end = Date.parse "#{ month } #{ day_to }, #{ year }"
+            else
+              wc.end = nil
+            end
+          end
+        end
+
+        if content = attrs[:location]
+          wc.address = content
+        end
+
+        wc.save!
       end
 
       fetch_page (current_page_no + 1) if current_page_no < @max_pages

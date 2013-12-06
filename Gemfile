@@ -83,4 +83,5 @@ group :development do
   gem 'pry'
   gem 'foreman'
   gem 'dotenv-rails'
+  gem 'byebug', platforms: :mri_20
 end
