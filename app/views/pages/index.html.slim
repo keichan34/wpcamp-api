@@ -11,45 +11,53 @@
       | Use the hostname of this page as the base for all API calls. Note that HTTPS is required, and all non-HTTPS requests will be redirected. Correct example of a full API call:
     pre
       | #{ request.protocol }#{ request.host_with_port }/wordcamps.json
-    h3
-      code
-        | /wordcamps.json
-    p
-      ' A basic list of WordCamps. Includes paging metadata. Pages can be specified with the "page" URL parameter:
-      code
-        | /wordcamps.json?page=1
-      | .
-      | <br>An example object:
-    pre
-      |
-        {
-          "wordcamps": [
-            {
-              "id": 1,
-              "guid": "http://central.wordcamp.org/?post_type=wordcamp&p=1239054",
-              "url": "http://2014.atlanta.wordcamp.org",
-              "title": "WordCamp Atlanta",
-              "address": "",
-              "dates": {
-                  "start": "2014-03-14",
-                  "end": "2014-03-15"
+    .api-section
+      h3
+        code
+          | /wordcamps.json
+      p
+        ' A basic list of WordCamps. Includes paging metadata. Pages can be specified with the "page" URL parameter:
+        code
+          | /wordcamps.json?page=1
+        | .
+        | <br>An example object:
+      pre
+        |
+          {
+            "wordcamps": [
+              {
+                "id": 1,
+                "guid": "http://central.wordcamp.org/?post_type=wordcamp&p=1239054",
+                "url": "http://2014.atlanta.wordcamp.org",
+                "title": "WordCamp Atlanta",
+                "address": "",
+                "dates": {
+                    "start": "2014-03-14",
+                    "end": "2014-03-15"
+                },
+                "thumbnail": {
+                    "original": "URL to the original",
+                    "thumb": "URL to a thumbnail-sized version"
+                }
               },
-              "thumbnail": {
-                  "original": "URL to the original",
-                  "thumb": "URL to a thumbnail-sized version"
-              }
-            },
-          ],
-          "meta": {
-            "current_page": 1,
-            "total_pages": 14
+            ],
+            "meta": {
+              "current_page": 1,
+              "total_pages": 14
+            }
           }
-        }
-    h3
-      code
-        | /wordcamps/:id.json
-    p
-      | Using the <code>id</code> parameter from the above response, you can request more information about a specific WordCamp. Right now, the response data is the same.
+    .api-section
+      h3
+        code
+          | /wordcamps/search.json?q=[query]
+      p
+        | A very basic search mechanism. Searches through the WordCamp titles.
+    .api-section
+      h3
+        code
+          | /wordcamps/:id.json
+      p
+        | Using the <code>id</code> parameter from the above responses, you can request more information about a specific WordCamp. Right now, the response data is the same.
 
 .row#wordcamps data={ load_to_page: @preload_up_to_page }
 .row

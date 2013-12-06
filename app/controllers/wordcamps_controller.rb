@@ -3,19 +3,34 @@ class WordcampsController < ApplicationController
   def index
     @wordcamps = WordCamp.order('start DESC').page params[:page]
 
-    respond_to do |f|
-      f.html { redirect_to root_path }
-      f.json
-    end
+    default_response
   end
 
   def show
     @wordcamp = WordCamp.find params[:id]
 
-    respond_to do |f|
-      f.html { redirect_to root_path }
-      f.json
+    default_response
+  end
+
+  def search
+    @wordcamps = WordCamp.order('start DESC').where('title LIKE ?', "%#{params[:q]}%").page params[:page]
+
+    default_response do
+      render 'index'
     end
   end
+
+  private
+
+    def default_response
+      respond_to do |f|
+        f.html { redirect_to root_path }
+        if block_given?
+          f.json { yield }
+        else
+          f.json
+        end
+      end
+    end
 
 end
