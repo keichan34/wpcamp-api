@@ -13,8 +13,9 @@ class ApplicationController < ActionController::Base
     end
 
     def override_language
-      return nil unless params[:locale]
-      I18n.locale_available?(params[:locale].to_sym) ? params[:locale].to_sym : nil
+      override_to = params[:fb_locale] || params[:locale]
+      return nil unless override_to
+      I18n.locale_available?(override_to.to_sym) ? override_to.to_sym : nil
     end
 
 end
