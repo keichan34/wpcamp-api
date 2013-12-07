@@ -7,7 +7,7 @@ WpcampApi::Application.routes.draw do
 
   get '/admin' => 'admin_pages#index'
 
-  get '/page/:page' => 'pages#index'
+  get '/page/:page' => 'pages#index_page'
   root to: 'pages#index'
 
   resources :wordcamps, only: [ :show, :index ] do

@@ -7,8 +7,12 @@ $(document).on 'ready', () ->
 
   return if $wordcamps.length == 0
 
-  last_page = 1
+  next_page = 1
   finished = false
+
+  # See if there are pre-loaded pages.
+  $(".page-placemarker.end").each () ->
+    next_page = Math.max next_page, parseInt($(this).data('page')) + 1
 
   load_page = (pageno = 1, async = true) ->
     load_page_with_helper Routes.wordcamps_path, {}, pageno, async
@@ -26,7 +30,7 @@ $(document).on 'ready', () ->
           $load_more.hide()
           finished = true
         else
-          last_page = data.meta.current_page + 1
+          next_page = data.meta.current_page + 1
 
         to_append = []
         $.each data.wordcamps, () ->
@@ -43,13 +47,14 @@ $(document).on 'ready', () ->
 
   $load_more.click (e) ->
     e.preventDefault()
-    current_helper last_page
+    current_helper next_page
 
-  preload_to_page = $wordcamps.data 'load-to-page'
-
-  pages = (x for x in [1..preload_to_page])
-  $.each pages, () ->
-    current_helper this, false
+  # No pages were auto-loaded.
+  if next_page <= 1
+    current_helper 1
+  else
+    $wordcamps.imagesLoaded () ->
+      $('html, body').scrollTop $(".page-placemarker.start[data-page='#{ next_page - 1 }']").offset().top - 40
 
   current_state_page = 1
 
@@ -75,11 +80,11 @@ $(document).on 'ready', () ->
 
     # Infinite scroll
     if ($load_more.offset().top - window.innerHeight) - window.scrollY <= 500 and !finished
-      current_helper last_page
+      current_helper next_page
 
   $query.keyup (e) ->
     val = $query.val()
-    last_page = 1
+    next_page = 1
 
     if val.length <= 3 and current_helper == load_search_page
       $wordcamps.empty()

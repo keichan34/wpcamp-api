@@ -8,7 +8,14 @@
         label.sr-only for="query" Search
         input.form-control#query type="text" placeholder="Start typing to search..."
 
-.row#wordcamps data={ load_to_page: @preload_up_to_page }
+.row#wordcamps
+  - if @wordcamps
+    - i = 0
+    - @wordcamps.each_slice(Kaminari.config.default_per_page) do |wordcamps|
+      - i += 1
+      .page-placemarker.start data-page="#{i}"
+      = render partial: 'wordcamps/wordcamp', collection: @wordcamps
+      .page-placemarker.end data-page="#{i}"
 .row
   .col-lg-12
     a#load-more href="#"

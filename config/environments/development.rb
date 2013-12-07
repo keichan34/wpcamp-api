@@ -35,6 +35,8 @@ WpcampApi::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  config.cache_store = :memory_store
+
   # Paperclip
   config.paperclip_defaults = {
     path: ":rails_root/public/system/:class/:attachment/:id_partition/:style/:filename",

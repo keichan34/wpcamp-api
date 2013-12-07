@@ -18,4 +18,5 @@
 #= require bootstrap/transition
 #= require bootstrap/alert
 #= require_tree ./templates
+#= require ./imagesloaded.js
 #= require_tree .
