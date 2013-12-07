@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 
     def override_language
 
-      override_to = normalize_language_code (params[:fb_locale] || params[:locale])
+      override_to = normalize_language_code (request.headers['X-Facebook-Locale'] || params[:locale])
       return nil unless override_to
       I18n.locale_available?(override_to) ? override_to : nil
     end
