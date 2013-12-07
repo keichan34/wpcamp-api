@@ -20,6 +20,14 @@ class WordcampsController < ApplicationController
     end
   end
 
+  def location
+    @wordcamps = WordCamp.where( title_for_slug: params[:location] ).order('start DESC').page params[:page]
+
+    default_response do
+      render 'index'
+    end
+  end
+
   private
 
     def default_response

@@ -9,7 +9,7 @@ namespace :feed_pollers do
 
     desc "Imports all data from WordCamp Central"
     task :deep => :environment do
-      Importer::WordcampCentral.run max_pages: 200
+      Importer::WordcampCentral.run max_pages: 200, force: true
     end
 
     desc "Force-imports data from WordCamp Central"

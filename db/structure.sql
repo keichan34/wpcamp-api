@@ -126,7 +126,8 @@ CREATE TABLE word_camps (
     thumbnail_content_type character varying(255),
     thumbnail_file_size integer,
     thumbnail_updated_at timestamp without time zone,
-    description text
+    description text,
+    title_for_slug character varying(255)
 );
 
 
@@ -251,6 +252,13 @@ CREATE INDEX index_word_camps_on_start ON word_camps USING btree (start);
 
 
 --
+-- Name: index_word_camps_on_title_for_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_word_camps_on_title_for_slug ON word_camps USING btree (title_for_slug);
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -276,3 +284,5 @@ INSERT INTO schema_migrations (version) VALUES ('20131206005541');
 INSERT INTO schema_migrations (version) VALUES ('20131207033908');
 
 INSERT INTO schema_migrations (version) VALUES ('20131207082231');
+
+INSERT INTO schema_migrations (version) VALUES ('20131207133702');

@@ -18,7 +18,7 @@ pre
     code
       | /wordcamps.json?page=1
     | .
-    | <br>An example object:
+    | <br>An example response:
   pre
     |
       {
@@ -50,6 +50,18 @@ pre
       | /wordcamps/search.json?q=[query]
   p
     | A very basic search mechanism. Searches through the WordCamp titles and descriptions.
+.api-section
+  h3
+    code
+      | /wordcamps/location/[location].json
+  p
+    | Returns a list of WordCamps for the given location, sorted in reverse date order (most recent will come first).
+    br
+    | Example Request:
+  pre
+    | /wordcamps/location/tokyo.json
+  p
+    | The response is the same format as the main list. This is faster and more deterministic than the basic search API.
 .api-section
   h3
     code

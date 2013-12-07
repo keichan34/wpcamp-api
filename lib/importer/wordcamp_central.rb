@@ -53,6 +53,8 @@ class Importer::WordcampCentral
 
         wc.created_at = Time.parse item.xpath('pubDate').text.strip
         wc.title = item.xpath('title').text.strip
+        wc.title_for_slug = wc.title.downcase.gsub(/\s*wordcamp\s*/, '').gsub(/[^a-z0-9]+/, '_')
+
         wc.description = item.xpath('content:encoded').text
 
         url = item.xpath('link').text.strip
@@ -69,6 +71,7 @@ class Importer::WordcampCentral
 
         cursor = nil
         attrs = {}
+
         doc.css('.wc-single-info').children.each do |child|
           # start a new cursor
           if child['class'] == 'wc-single-label'
@@ -81,8 +84,8 @@ class Importer::WordcampCentral
 
         attrs = Hash[attrs.map { |key, value| [key, value.map { |e| e.text }.join('').strip.gsub(/\s+/, ' ') ] }]
 
-        if content = attrs[:date]
-          if /^(?<month>.*?)\s+(?<day_from>\d{1,2})(-(?<day_to>\d{1,2}))?\s*,?\s*(?<year>\d{4})$/ =~ content
+        if attrs[:date]
+          if /^(?<month>.*?)\s+(?<day_from>\d{1,2})(-(?<day_to>\d{1,2}))?\s*,?\s*(?<year>\d{4})$/ =~ attrs[:date]
             wc.start = Date.parse "#{ month } #{ day_from }, #{ year }"
 
             if day_to
@@ -93,8 +96,8 @@ class Importer::WordcampCentral
           end
         end
 
-        if content = attrs[:location]
-          wc.address = content
+        if attrs[:location]
+          wc.address = attrs[:location]
         end
 
         wc.save!
