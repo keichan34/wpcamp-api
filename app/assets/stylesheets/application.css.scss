@@ -14,3 +14,13 @@
 @import "bootstrap";
 
 @import "wordcamp";
+
+#github-banner {
+  position: fixed;
+  top: 0;
+  right: 0;
+  border: 0;
+  z-index: 100;
+
+  @extend .hidden-xs;
+}
