@@ -1,12 +1,12 @@
 h1
-  | （非公式）WordCamp API へようこそ。
+  | WordCamp API (非公式) へようこそ。
 p
-  | The WordCamp API aims to provide you with machine-readable information of the most recent WordCamps around the world.
+  | この WordCamp API は、世界で開催されている WordCamp に関する最新情報を機械可読な形で提供するために作られました。
 p
-  | The API is free to use, and this project is run as a hobby, so please don't ping us more than a couple times a day. If you'd like to donate (read: ensure this service is fast and responsive :) ), please send some bitcoins over to <a href="bitcoin:1239L7WWS29oFb9vQKgWKYF9ky9ptRyFyF">1239L7WWS29oFb9vQKgWKYF9ky9ptRyFyF</a> !
-h2 API Documentation
+  | この API は無料でご利用いただけます。個人の趣味で公開しているプロジェクトですので、情報取得の頻度は一日数回くらいに留めていただけると助かります。(このサービスが高速かつ安定して稼働できるよう) 寄付をしたい方は <a href="bitcoin:1239L7WWS29oFb9vQKgWKYF9ky9ptRyFyF">1239L7WWS29oFb9vQKgWKYF9ky9ptRyFyF</a> まで Bitcoin をお送りください :)
+h2 API ドキュメンテーション
 p
-  | Use the hostname of this page as the base for all API calls. Note that HTTPS is required, and all non-HTTPS requests will be redirected. Correct example of a full API call:
+  | このページのホスト名をすべての API コールのベースとして使ってください。HTTPS は必須であり、HTTPS ではないリクエストはすべてリダイレクトされます。完全な形の API コール例は以下のとおりです。
 pre
   | #{ request.protocol }#{ request.host_with_port }/wordcamps.json
 .api-section
@@ -14,11 +14,11 @@ pre
     code
       | /wordcamps.json
   p
-    ' A basic list of WordCamps. Includes paging metadata. Pages can be specified with the "page" URL parameter:
+    ' WordCamp の基本的な一覧。ページ送りのメタ情報が含まれる。URL パラメータ "page" でページを指定できる
     code
       | /wordcamps.json?page=1
     | .
-    | <br>An example object:
+    | <br>オブジェクトの例。
   pre
     |
       {
@@ -34,8 +34,8 @@ pre
                 "end": "2014-03-15"
             },
             "thumbnail": {
-                "original": "URL to the original",
-                "thumb": "URL to a thumbnail-sized version"
+                "original": "元画像の URL",
+                "thumb": "サムネイルサイズ画像の URL"
             }
           },
         ],
@@ -49,10 +49,10 @@ pre
     code
       | /wordcamps/search.json?q=[query]
   p
-    | A very basic search mechanism. Searches through the WordCamp titles.
+    | とても簡易的な検索メカニズム。WordCamp のタイトルと説明 (英語) を元に検索する。
 .api-section
   h3
     code
       | /wordcamps/:id.json
   p
-    | Using the <code>id</code> parameter from the above responses, you can request more information about a specific WordCamp. Right now, the response data is the same.
+    | 上記のレスポンス内の <code>id</code> パラメータを使うことで、特定の WordCamp に関する情報のみをリクエストできる (現時点では ID を指定しない場合と同じレスポンス内容) 。
