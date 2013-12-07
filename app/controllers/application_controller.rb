@@ -9,11 +9,11 @@ class ApplicationController < ActionController::Base
 
     def set_locale
       @available_locales ||= I18n.available_locales.map { |e| e.to_s.gsub('_', '-') }
-      use_locale = override_language || session[:current_locale] || http_accept_language.compatible_language_from(@available_locales).gsub('-', '_').to_sym || I18n.default_locale
+      use_locale = override_language || session[:current_locale] || ((tmp = http_accept_language.compatible_language_from(@available_locales)) ? tmp.gsub('-', '_').to_sym : nil) || I18n.default_locale
 
       I18n.locale = use_locale
       if session[:current_locale] != use_locale
-        use_locale
+        session[:current_locale] = use_locale
       end
     end
 
