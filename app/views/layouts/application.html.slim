@@ -10,6 +10,7 @@ html lang="#{ current_lang }"
     meta property="og:title" content="#{ t 'title' }"
     meta property="og:url" content="#{ request.protocol }#{ request.host_with_port }/"
     meta property="og:description" content="#{ t 'ogp.description' }"
+    meta property="og:image" content="#{ image_url 'unofficial-wordcamp-api-logo-700.png' }"
     == ogp_locale_tags
     /[if lt IE 9]
       script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"
