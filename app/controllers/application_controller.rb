@@ -13,9 +13,19 @@ class ApplicationController < ActionController::Base
     end
 
     def override_language
-      override_to = params[:fb_locale] || params[:locale]
+
+      override_to = normalize_language_code (params[:fb_locale] || params[:locale])
       return nil unless override_to
-      I18n.locale_available?(override_to.to_sym) ? override_to.to_sym : nil
+      I18n.locale_available?(override_to) ? override_to : nil
+    end
+
+    def normalize_language_code input
+      {
+        ja: :ja_JP,
+        ja_jp: :ja_JP,
+        en: :en_US,
+        en_us: :en_US
+      }[input.to_sym] || input.to_sym
     end
 
 end
