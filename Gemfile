@@ -74,6 +74,9 @@ gem 'paperclip'
 
 gem 'textacular', '~> 3.0'
 
+# Parse Accept-Language:
+gem 'http_accept_language'
+
 group :production do
   # For Heroku
   gem 'rails_12factor'

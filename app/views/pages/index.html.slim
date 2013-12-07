@@ -1,63 +1,6 @@
 .row
   .col-lg-12
-    h1
-      | Welcome to the (unofficial) WordCamp API.
-    p
-      | The WordCamp API aims to provide you with machine-readable information of the most recent WordCamps around the world.
-    p
-      | The API is free to use, and this project is run as a hobby, so please don't ping us more than a couple times a day. If you'd like to donate (read: ensure this service is fast and responsive :) ), please send some bitcoins over to <a href="bitcoin:1239L7WWS29oFb9vQKgWKYF9ky9ptRyFyF">1239L7WWS29oFb9vQKgWKYF9ky9ptRyFyF</a> !
-    h2 API Documentation
-    p
-      | Use the hostname of this page as the base for all API calls. Note that HTTPS is required, and all non-HTTPS requests will be redirected. Correct example of a full API call:
-    pre
-      | #{ request.protocol }#{ request.host_with_port }/wordcamps.json
-    .api-section
-      h3
-        code
-          | /wordcamps.json
-      p
-        ' A basic list of WordCamps. Includes paging metadata. Pages can be specified with the "page" URL parameter:
-        code
-          | /wordcamps.json?page=1
-        | .
-        | <br>An example object:
-      pre
-        |
-          {
-            "wordcamps": [
-              {
-                "id": 1,
-                "guid": "http://central.wordcamp.org/?post_type=wordcamp&p=1239054",
-                "url": "http://2014.atlanta.wordcamp.org",
-                "title": "WordCamp Atlanta",
-                "address": "",
-                "dates": {
-                    "start": "2014-03-14",
-                    "end": "2014-03-15"
-                },
-                "thumbnail": {
-                    "original": "URL to the original",
-                    "thumb": "URL to a thumbnail-sized version"
-                }
-              },
-            ],
-            "meta": {
-              "current_page": 1,
-              "total_pages": 14
-            }
-          }
-    .api-section
-      h3
-        code
-          | /wordcamps/search.json?q=[query]
-      p
-        | A very basic search mechanism. Searches through the WordCamp titles.
-    .api-section
-      h3
-        code
-          | /wordcamps/:id.json
-      p
-        | Using the <code>id</code> parameter from the above responses, you can request more information about a specific WordCamp. Right now, the response data is the same.
+    = render 'index_content'
 .row
   .col-md-6.col-md-offset-3.col-sm-12
     form.form-inline#query-form role="form"

@@ -28,3 +28,20 @@
 .main-container {
   padding-bottom: 40px;
 }
+
+.lang-switcher {
+  text-align: right;
+  padding-right: 40px;
+  padding-top: 10px;
+
+  .lang {
+    &:before {
+      content: ' | ';
+    }
+
+    &:first-child:before {
+      content: '';
+      display: none;
+    }
+  }
+}

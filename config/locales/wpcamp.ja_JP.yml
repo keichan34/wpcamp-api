@@ -1,0 +1,7 @@
+ja_JP:
+  languages:
+    en_US: 英語
+    ja_JP: 日本語
+  title: WordCamp API
+  ogp:
+    description: WordCamp API is a simple JSON API that provides data about upcoming and past WordCamps.
