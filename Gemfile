@@ -11,7 +11,7 @@ platforms :rbx do
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.0.1'
+gem 'rails', '~> 4.0.2'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -53,10 +53,8 @@ end
 # gem 'puma'
 gem 'unicorn'
 
-gem 'devise', '~> 3.1.1'
-
 gem 'slim'
-gem 'bootstrap-sass', '~> 3.0.1.0.rc'
+gem 'bootstrap-sass', '~> 3.0.3.0'
 
 gem 'newrelic_rpm'
 
@@ -76,6 +74,8 @@ gem 'textacular', '~> 3.0'
 
 # Parse Accept-Language:
 gem 'http_accept_language'
+
+gem 'devise', '~> 3.2.2'
 
 group :production do
   # For Heroku

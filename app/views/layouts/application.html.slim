@@ -27,5 +27,13 @@ html lang="#{ current_lang }"
                   = t "languages.#{ locale }"
                 - else
                   = link_to t("languages.#{ locale }"), root_path( locale: locale )
-
+      - if flash.any?
+        .row
+          .col-md-8.col-md-offset-2
+            - trans = { notice: :success, alert: :danger }
+            - flash.each do |style, content|
+              .alert.alert-dismissable class="alert-#{ trans[style] || style }"
+                button type="button" class="close" data-dismiss="alert" aria-hidden="true"
+                  | &times;
+                = content
       = yield

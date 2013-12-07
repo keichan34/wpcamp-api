@@ -15,5 +15,7 @@
 #= require browser_timezone_rails/application.js
 #= require js-routes
 #= require handlebars.runtime
+#= require bootstrap/transition
+#= require bootstrap/alert
 #= require_tree ./templates
 #= require_tree .

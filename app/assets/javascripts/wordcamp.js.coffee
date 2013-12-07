@@ -5,6 +5,8 @@ $(document).on 'ready', () ->
   $load_more = $ '#load-more'
   $query     = $ '#query'
 
+  return if $wordcamps.length == 0
+
   last_page = 1
   finished = false
 
