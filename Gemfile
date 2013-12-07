@@ -72,6 +72,8 @@ gem 'kaminari'
 gem 'aws-sdk'
 gem 'paperclip'
 
+gem 'textacular', '~> 3.0'
+
 group :production do
   # For Heroku
   gem 'rails_12factor'

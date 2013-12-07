@@ -12,6 +12,11 @@ namespace :feed_pollers do
       Importer::WordcampCentral.run max_pages: 200
     end
 
+    desc "Force-imports data from WordCamp Central"
+    task :force => :environment do
+      Importer::WordcampCentral.run force: true
+    end
+
   end
 
 end

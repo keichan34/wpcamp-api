@@ -3,14 +3,21 @@ $(document).on 'ready', () ->
 
   $wordcamps = $ '#wordcamps'
   $load_more = $ '#load-more'
+  $query     = $ '#query'
 
   last_page = 1
   finished = false
 
   load_page = (pageno = 1, async = true) ->
+    load_page_with_helper Routes.wordcamps_path, {}, pageno, async
 
+  load_search_page = (pageno = 1, async = true) ->
+    load_page_with_helper Routes.search_wordcamps_path, {q: $query.val()}, pageno, async
+
+  load_page_with_helper = (helper, args = {}, pageno = 1, async = true) ->
+    _args = $.extend { format: 'json', page: pageno }, args
     $.ajax
-      url: Routes.wordcamps_path format: 'json', page: pageno
+      url: helper _args
       async: async
       success: (data, textStatus, jqXHR) ->
         if data.meta.current_page >= data.meta.total_pages
@@ -30,15 +37,17 @@ $(document).on 'ready', () ->
           $wordcamps.append to_append
           $wordcamps.append "<div class='page-placemarker end' data-page='#{data.meta.current_page}'></div>"
 
+  current_helper = load_page
+
   $load_more.click (e) ->
     e.preventDefault()
-    load_page last_page
+    current_helper last_page
 
   preload_to_page = $wordcamps.data 'load-to-page'
 
   pages = (x for x in [1..preload_to_page])
   $.each pages, () ->
-    load_page this, false
+    current_helper this, false
 
   current_state_page = 1
 
@@ -64,4 +73,20 @@ $(document).on 'ready', () ->
 
     # Infinite scroll
     if ($load_more.offset().top - window.innerHeight) - window.scrollY <= 500 and !finished
-      load_page last_page
+      current_helper last_page
+
+  $query.keyup (e) ->
+    val = $query.val()
+    last_page = 1
+
+    if val.length <= 3 and current_helper == load_search_page
+      $wordcamps.empty()
+      current_helper = load_page
+
+      load_page()
+      return
+
+    current_helper = load_search_page
+
+    $wordcamps.empty()
+    load_search_page()

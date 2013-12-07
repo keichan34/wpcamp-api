@@ -9,14 +9,15 @@ class Importer::WordcampCentral
 
   def run args={}
     args = {
-      max_pages: 10
+      max_pages: 10,
+      force: false
     }.merge args
 
     @max_pages = args[:max_pages]
 
     time_started = Time.now.utc
 
-    if last_fetch_time = Metadata['wordcamp_central_last_fetch_time']
+    if last_fetch_time = Metadata['wordcamp_central_last_fetch_time'] and !args[:force]
       last_fetch_time = Time.parse(last_fetch_time).utc
     else
       last_fetch_time = 20.years.ago.utc
@@ -52,6 +53,7 @@ class Importer::WordcampCentral
 
         wc.created_at = Time.parse item.xpath('pubDate').text.strip
         wc.title = item.xpath('title').text.strip
+        wc.description = item.xpath('content:encoded').text
 
         url = item.xpath('link').text.strip
 

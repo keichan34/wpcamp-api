@@ -13,7 +13,7 @@ class WordcampsController < ApplicationController
   end
 
   def search
-    @wordcamps = WordCamp.order('start DESC').where('title LIKE ?', "%#{params[:q]}%").page params[:page]
+    @wordcamps = WordCamp.basic_search({ title: params[:q], description: params[:q] }, false).page params[:page]
 
     default_response do
       render 'index'

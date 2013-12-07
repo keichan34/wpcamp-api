@@ -58,6 +58,12 @@
           | /wordcamps/:id.json
       p
         | Using the <code>id</code> parameter from the above responses, you can request more information about a specific WordCamp. Right now, the response data is the same.
+.row
+  .col-md-6.col-md-offset-3.col-sm-12
+    form.form-inline#query-form role="form"
+      .form-group
+        label.sr-only for="query" Search
+        input.form-control#query type="text" placeholder="Start typing to search..."
 
 .row#wordcamps data={ load_to_page: @preload_up_to_page }
 .row
