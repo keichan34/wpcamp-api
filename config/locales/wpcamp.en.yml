@@ -1,4 +1,8 @@
 en:
+  admin_bar:
+    full_html: You're logged in as an admin. Great! %{panel_link}, or %{logout_link}.
+    panel_link: Access the main panel
+    logout_link: logout now
   languages:
     en: English
     ja: Japanese (日本語)
