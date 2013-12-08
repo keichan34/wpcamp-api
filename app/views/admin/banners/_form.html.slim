@@ -1,10 +1,12 @@
 = form_for([:admin, @wordcamp, @banner], html: { multipart: true, class: 'form-horizontal', role: 'form' }) do |f|
   - e = @banner.errors
+
   .form-group class="#{ 'has-error' unless e[:title].blank? }"
     = f.label :title, class: 'control-label col-sm-3'
     .col-sm-9
       = f.text_field :title, :autofocus => true, class: 'form-control'
       = error_description_list e, :title
+
   .form-group class="#{ 'has-error' unless e[:width].blank? and e[:height].blank? }"
     = f.label :width, class: 'control-label col-sm-3'
     .col-sm-4
@@ -18,6 +20,10 @@
       span.help-block
         | Height in pixels.
       = error_description_list e, :height
+    .col-sm-9.col-sm-offset-3
+      span.help-block
+        | If you leave these fields blank and upload a new image, they will be automatically calculated from the uploaded image.
+
   .form-group class="#{ 'has-error' unless e[:alt].blank? }"
     = f.label :alt, class: 'control-label col-sm-3'
     .col-sm-9
@@ -25,6 +31,7 @@
       span.help-block
         | &lt;img&gt; "alt" attribute value. Also used for "title".
       = error_description_list e, :width
+
   .form-group class="#{ 'has-error' unless e[:banner].blank? }"
     = f.label :banner, class: 'control-label col-sm-3'
     .col-sm-9
@@ -36,6 +43,7 @@
             | Remove image
       = f.file_field :banner, class: 'form-control'
       = error_description_list e, :banner
+
   .row
     .col-sm-9.col-sm-offset-3
       = f.submit 'Save', class: 'btn btn-primary'
