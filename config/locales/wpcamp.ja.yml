@@ -1,7 +1,7 @@
-ja_JP:
+ja:
   languages:
-    en_US: 英語 (English)
-    ja_JP: 日本語
+    en: 英語 (English)
+    ja: 日本語
   title: WordCamp API
   ogp:
     description: WordCamp API は、開催予定および過去に開催済みの WordCamp に関する情報を提供するシンプルな JSON API です。

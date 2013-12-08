@@ -1,6 +1,6 @@
 #SOURCE https://gist.github.com/orzccc/3104030
 
-ja_JP:
+ja:
   devise:
     confirmations:
       confirmed: 'アカウントを登録しました。'

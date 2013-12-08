@@ -8,7 +8,7 @@ html lang="#{ current_lang }"
     == javascript_include_tag "application"
     == csrf_meta_tags
     meta property="og:title" content="#{ t 'title' }"
-    meta property="og:url" content="#{ request.protocol }#{ request.host_with_port }/"
+    meta property="og:url" content="#{ root_with_locale_url(locale: @locale) }"
     meta property="og:description" content="#{ t 'ogp.description' }"
     meta property="og:image" content="#{ image_url 'unofficial-wordcamp-api-logo-700.png' }"
     == ogp_locale_tags

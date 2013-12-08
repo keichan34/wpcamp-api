@@ -27,9 +27,9 @@ module WpcampApi
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     I18n.enforce_available_locales = true
     config.i18n.enforce_available_locales = true
-    config.i18n.available_locales = [:en_US, :ja_JP]
+    config.i18n.available_locales = [:en, :ja]
 
-    config.i18n.default_locale = :en_US
+    config.i18n.default_locale = :en
 
     # Save the schema in SQL format
     config.active_record.schema_format = :sql
