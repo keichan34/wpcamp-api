@@ -56,10 +56,16 @@ pre
       | /wordcamps/location/[location].json
   p
     | Returns a list of WordCamps for the given location, sorted in reverse date order (most recent will come first).
-    br
-    | Example Request:
-  pre
-    | /wordcamps/location/tokyo.json
+  .example
+    pre
+      | /wordcamps/location/tokyo.json
+  p
+    | Additional attributes that are accepted by this endpoint:
+  dl.dl-horizontal
+    dt include_banners
+    dd If this attribute is present, the response will include additional promotional banner information for each object.
+    dt year
+    dd Filters the response by year.
   p
     | The response is the same format as the main list. This is faster and more deterministic than the basic search API.
 .api-section

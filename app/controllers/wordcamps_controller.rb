@@ -23,6 +23,15 @@ class WordcampsController < ApplicationController
   def location
     @wordcamps = WordCamp.where( title_for_slug: params[:location] ).order('start DESC').page params[:page]
 
+    if params[:include_banners]
+      @wordcamps = @wordcamps.includes :banners
+      @include_banners = true
+    end
+
+    if params[:year]
+      @wordcamps = @wordcamps.where( 'EXTRACT(YEAR FROM"start") = ?', params[:year] )
+    end
+
     default_response do
       render 'index'
     end

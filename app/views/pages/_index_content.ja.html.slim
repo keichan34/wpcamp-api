@@ -53,6 +53,24 @@ pre
 .api-section
   h3
     code
+      | /wordcamps/location/[location].json
+  p
+    | Returns a list of WordCamps for the given location, sorted in reverse date order (most recent will come first).
+  .example
+    pre
+      | /wordcamps/location/tokyo.json
+  p
+    | Additional attributes that are accepted by this endpoint:
+  dl.dl-horizontal
+    dt include_banners
+    dd If this attribute is present, the response will include additional promotional banner information for each object.
+    dt year
+    dd Filters the response by year.
+  p
+    | The response is the same format as the main list. This is faster and more deterministic than the basic search API.
+.api-section
+  h3
+    code
       | /wordcamps/:id.json
   p
     | 上記のレスポンス内の <code>id</code> パラメータを使うことで、特定の WordCamp に関する情報のみをリクエストできる (現時点では ID を指定しない場合と同じレスポンス内容) 。
