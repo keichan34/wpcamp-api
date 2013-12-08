@@ -59,7 +59,7 @@ class Admin::BannersController < AdminController
     end
 
     def banner_params
-      params.require(:banner).permit :title, :alt, :width, :height, :banner, :delete_banner
+      params.require(:banner).permit :title, :alt, :width, :height, :banner, :delete_banner, :banner_url
     end
 
     def set_wordcamp

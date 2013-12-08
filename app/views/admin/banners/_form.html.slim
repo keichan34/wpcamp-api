@@ -42,6 +42,8 @@
             = f.check_box :delete_banner
             | Remove image
       = f.file_field :banner, class: 'form-control'
+      = f.label :banner_url, class: 'control-label'
+      = f.text_field :banner_url, class: 'form-control'
       = error_description_list e, :banner
 
   .row
