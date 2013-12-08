@@ -17,7 +17,7 @@ class Importer::WordcampCentral
 
     time_started = Time.now.utc
 
-    if last_fetch_time = Metadata['wordcamp_central_last_fetch_time'] and !args[:force]
+    if last_fetch_time = Setting.wordcamp_central_last_fetch_time and !args[:force]
       last_fetch_time = Time.parse(last_fetch_time).utc
     else
       last_fetch_time = 20.years.ago.utc
@@ -32,7 +32,7 @@ class Importer::WordcampCentral
       process_doc doc
     end
 
-    Metadata['wordcamp_central_last_fetch_time'] = time_started.to_s
+    Setting.wordcamp_central_last_fetch_time = time_started.to_s
 
   end
 

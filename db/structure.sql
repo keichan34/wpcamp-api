@@ -30,21 +30,34 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: metadata; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE metadata (
-    id integer NOT NULL,
-    key character varying(255) NOT NULL,
-    value text
+CREATE TABLE schema_migrations (
+    version character varying(255) NOT NULL
 );
 
 
 --
--- Name: metadata_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: settings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE SEQUENCE metadata_id_seq
+CREATE TABLE settings (
+    id integer NOT NULL,
+    var character varying(255) NOT NULL,
+    value text,
+    thing_id integer,
+    thing_type character varying(30),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: settings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE settings_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -53,19 +66,10 @@ CREATE SEQUENCE metadata_id_seq
 
 
 --
--- Name: metadata_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: settings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE metadata_id_seq OWNED BY metadata.id;
-
-
---
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE schema_migrations (
-    version character varying(255) NOT NULL
-);
+ALTER SEQUENCE settings_id_seq OWNED BY settings.id;
 
 
 --
@@ -154,7 +158,7 @@ ALTER SEQUENCE word_camps_id_seq OWNED BY word_camps.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY metadata ALTER COLUMN id SET DEFAULT nextval('metadata_id_seq'::regclass);
+ALTER TABLE ONLY settings ALTER COLUMN id SET DEFAULT nextval('settings_id_seq'::regclass);
 
 
 --
@@ -172,11 +176,11 @@ ALTER TABLE ONLY word_camps ALTER COLUMN id SET DEFAULT nextval('word_camps_id_s
 
 
 --
--- Name: metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY metadata
-    ADD CONSTRAINT metadata_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY settings
+    ADD CONSTRAINT settings_pkey PRIMARY KEY (id);
 
 
 --
@@ -210,10 +214,10 @@ CREATE INDEX ft_title_on_word_camps ON word_camps USING gin (to_tsvector('englis
 
 
 --
--- Name: index_metadata_on_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_settings_on_thing_type_and_thing_id_and_var; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_metadata_on_key ON metadata USING btree (key);
+CREATE UNIQUE INDEX index_settings_on_thing_type_and_thing_id_and_var ON settings USING btree (thing_type, thing_id, var);
 
 
 --
@@ -286,3 +290,5 @@ INSERT INTO schema_migrations (version) VALUES ('20131207033908');
 INSERT INTO schema_migrations (version) VALUES ('20131207082231');
 
 INSERT INTO schema_migrations (version) VALUES ('20131207133702');
+
+INSERT INTO schema_migrations (version) VALUES ('20131208053639');

@@ -77,6 +77,8 @@ gem 'http_accept_language'
 
 gem 'devise', '~> 3.2.2'
 
+gem "rails-settings-cached", "~> 0.3.1"
+
 group :production do
   # For Heroku
   gem 'rails_12factor'
