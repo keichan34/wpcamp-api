@@ -35,7 +35,8 @@ html lang="#{ current_lang }"
       .container
         .row
           .col-sm-12.inner-column
-            = image_tag 'header-logo-2x.png', alt: 'The (unofficial) WordCamp API', width: 221, height: 50
+            = link_to root_with_locale_url(locale: @locale) do
+              = image_tag 'header-logo-2x.png', alt: 'The (unofficial) WordCamp API', width: 221, height: 50
             .lang-switcher
               - I18n.available_locales.each do |locale|
                 span.lang
