@@ -1,0 +1,9 @@
+.wordcamp-tile.col-lg-3.col-md-6.col-xs-6 data={ id: wordcamp.id }
+  = link_to admin_word_camp_path(id: wordcamp.id), class: 'wordcamp-tile-inner' do
+    h5.title
+      = wordcamp.title
+    .period
+      = wordcamp.start
+      - if wordcamp.end
+        | ~ #{ wordcamp.end }
+    = image_tag wordcamp.thumbnail.url(:thumb), class: 'img-responsive thumbnail-image'

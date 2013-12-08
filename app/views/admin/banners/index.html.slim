@@ -1,0 +1,11 @@
+= render partial: 'header'
+.row.banners-row
+  - if @banners.any?
+    .col-lg-12
+      p.lead
+        | #{ link_to 'Add a new banner.', new_admin_word_camp_banner_path(word_camp_id: @wordcamp.id) }
+    = render @banners
+  - else
+    .col-lg-12
+      p.lead
+        | No banners yet! #{ link_to 'Create one now!', new_admin_word_camp_banner_path(word_camp_id: @wordcamp.id) }

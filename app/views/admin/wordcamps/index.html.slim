@@ -1,0 +1,11 @@
+.row
+  .col-lg-12
+    h1
+      ' WordCamp Admin
+      small
+        | Click to show details / manage banners
+.row.wordcamps
+  = render partial: 'admin/wordcamps/wordcamp', collection: @wordcamps
+.row
+  .col-md-6.col-md-offset-3
+    = paginate @wordcamps

@@ -6,6 +6,16 @@ WpcampApi::Application.routes.draw do
   }
 
   get '/admin' => 'admin_pages#index'
+  namespace :admin do
+    resources :wordcamps, only: [ :show, :index ], as: :word_camps do
+      collection do
+        get 'page/:page' => 'wordcamps#index'
+        get 'location/:location', action: :location
+      end
+
+      resources :banners
+    end
+  end
 
   get '/page/:page' => 'pages#index_page'
 

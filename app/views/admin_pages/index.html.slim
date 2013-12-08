@@ -3,3 +3,7 @@
     h1 Admin
     p
       = link_to 'Logout', destroy_user_session_path, method: :delete
+    h2 Administration Sections
+    ul
+      li
+        = link_to 'WordCamps / WordCamp Banner Admin', admin_word_camps_path

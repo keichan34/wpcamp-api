@@ -30,6 +30,45 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: banners; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE banners (
+    id integer NOT NULL,
+    title character varying(255),
+    width integer,
+    height integer,
+    alt character varying(255),
+    word_camp_id integer NOT NULL,
+    banner_file_name character varying(255),
+    banner_content_type character varying(255),
+    banner_file_size integer,
+    banner_updated_at timestamp without time zone,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: banners_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE banners_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: banners_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE banners_id_seq OWNED BY banners.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -158,6 +197,13 @@ ALTER SEQUENCE word_camps_id_seq OWNED BY word_camps.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY banners ALTER COLUMN id SET DEFAULT nextval('banners_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY settings ALTER COLUMN id SET DEFAULT nextval('settings_id_seq'::regclass);
 
 
@@ -173,6 +219,14 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 --
 
 ALTER TABLE ONLY word_camps ALTER COLUMN id SET DEFAULT nextval('word_camps_id_seq'::regclass);
+
+
+--
+-- Name: banners_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY banners
+    ADD CONSTRAINT banners_pkey PRIMARY KEY (id);
 
 
 --
@@ -211,6 +265,13 @@ CREATE INDEX ft_description_on_word_camps ON word_camps USING gin (to_tsvector('
 --
 
 CREATE INDEX ft_title_on_word_camps ON word_camps USING gin (to_tsvector('english'::regconfig, (title)::text));
+
+
+--
+-- Name: index_banners_on_word_camp_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_banners_on_word_camp_id ON banners USING btree (word_camp_id);
 
 
 --
@@ -292,3 +353,5 @@ INSERT INTO schema_migrations (version) VALUES ('20131207082231');
 INSERT INTO schema_migrations (version) VALUES ('20131207133702');
 
 INSERT INTO schema_migrations (version) VALUES ('20131208053639');
+
+INSERT INTO schema_migrations (version) VALUES ('20131208071630');

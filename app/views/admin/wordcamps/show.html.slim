@@ -1,0 +1,35 @@
+.row
+  .col-lg-12
+    h1
+      = @wordcamp.title
+      | &nbsp;
+      small
+        ' #{ @wordcamp.start }
+        - if @wordcamp.end
+          ' ~ #{ @wordcamp.end }
+
+    h5
+      = link_to 'Edit promotional banners', admin_word_camp_banners_path(word_camp_id: @wordcamp.id)
+
+    h4 Metadata
+
+    dl.dl-horizontal
+      dt WordCamp URL
+      dd
+        = link_to @wordcamp.url, @wordcamp.url, target: '_blank'
+      dt WordCamp Central URL
+      dd
+        = link_to @wordcamp.guid, @wordcamp.guid, target: '_blank'
+      dt Address
+      dd
+        = @wordcamp.address
+
+    h4 Description
+
+    .wordcamp-description
+      = sanitize @wordcamp.description
+
+    h4 Website Screenshot
+
+    = link_to @wordcamp.url, target: '_blank' do
+      = image_tag @wordcamp.thumbnail.url(:large), class: 'img-responsive'

@@ -1,0 +1,22 @@
+= render 'header'
+.row
+  .col-md-8.col-md-offset-2.col-sm-12
+    h2
+      ' Banner "#{ @banner.title }"
+      small
+        = link_to 'Edit', edit_admin_word_camp_banner_path(word_camp_id: @wordcamp.id, id: @banner.id), class: 'btn btn-default btn-xs'
+        | &nbsp;
+        = link_to 'Delete', admin_word_camp_banner_path(word_camp_id: @wordcamp.id, id: @banner.id), class: 'btn btn-danger btn-xs', method: :delete, confirm: "Are you sure you want to delete '#{ @banner.title }'? This action is irreversible."
+    dl.dl-horizontal
+      dt Width
+      dd
+        = @banner.width
+        ' px
+      dt Height
+      dd
+        = @banner.height
+        ' px
+      dt &lt;img&gt; "alt" attribute
+      dd = @banner.alt.empty? ? '< not set >' : @banner.alt
+    p
+      = image_tag @banner.banner.url(:original), class: 'img-responsive'

@@ -20,4 +20,14 @@ module ApplicationHelper
     out
   end
 
+  def error_description_list errors, key
+    return '' if errors.empty?
+
+    errors[key].map do |x|
+      content_tag :span, class: 'help-block' do
+        errors.full_message key, x
+      end
+    end.join('').html_safe
+  end
+
 end

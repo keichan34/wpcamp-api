@@ -1,0 +1,8 @@
+.row
+  .col-lg-12
+    = link_to "← Back to #{ @wordcamp.title }", admin_word_camp_path(id: @wordcamp.id)
+    h1
+      = @wordcamp.title
+      | &nbsp;
+      small
+        = link_to 'Promotional Banners', admin_word_camp_banners_path(word_camp_id: @wordcamp.id)

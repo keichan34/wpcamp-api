@@ -1,0 +1,4 @@
+.col-sm-6
+  = link_to admin_word_camp_banner_path(word_camp_id: @wordcamp.id, id: banner.id) do
+    h4 = banner.title
+    = image_tag banner.banner.url(:original), class: 'img-responsive'

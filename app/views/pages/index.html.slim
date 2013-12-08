@@ -8,7 +8,7 @@
         label.sr-only for="query" Search
         input.form-control#query type="text" placeholder="Start typing to search..."
 
-.row#wordcamps
+.row.wordcamps#wordcamps
   - if @wordcamps
     - i = 0
     - @wordcamps.each_slice(Kaminari.config.default_per_page) do |wordcamps|
