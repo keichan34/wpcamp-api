@@ -11,6 +11,11 @@
  *= require_self
  */
 
+
+// 146a7e
+
+$brand-primary: #146a7e;
+
 @import "bootstrap";
 
 @import "wordcamp";
@@ -33,14 +38,36 @@
   padding-bottom: 40px;
 }
 
+.header-container {
+  background: image-url('header-bg.png') 0 0 repeat-x;
+  background-size: 4px 76px;
+
+  padding: 13px 0;
+
+  .inner-column {
+    position: relative;
+  }
+}
+
 .lang-switcher {
+  position: absolute;
+  right: 65px;
+  top: -5px;
+
   text-align: right;
-  padding-right: 40px;
-  padding-top: 10px;
 
   .lang {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+
+    .current-lang {
+      color: #fff;
+    }
+
     &:before {
       content: ' | ';
+      color: #fff;
     }
 
     &:first-child:before {

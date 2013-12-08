@@ -31,16 +31,20 @@ html lang="#{ current_lang }"
       .admin-bar
         .admin-link-wrapper
           = t 'admin_bar.full_html', panel_link: link_to( t('admin_bar.panel_link'), admin_path ), logout_link: link_to( t('admin_bar.logout_link'), destroy_user_session_path, method: :delete )
+    .header-container
+      .container
+        .row
+          .col-sm-12.inner-column
+            = image_tag 'header-logo-2x.png', alt: 'The (unofficial) WordCamp API', width: 221, height: 50
+            .lang-switcher
+              - I18n.available_locales.each do |locale|
+                span.lang
+                  - if I18n.locale == locale
+                    span.current-lang
+                      = t "languages.#{ locale }"
+                  - else
+                    = link_to t("languages.#{ locale }"), root_path( locale: locale )
     .container.main-container
-      .row
-        .col-md-12
-          .lang-switcher
-            - I18n.available_locales.each do |locale|
-              span.lang
-                - if I18n.locale == locale
-                  = t "languages.#{ locale }"
-                - else
-                  = link_to t("languages.#{ locale }"), root_path( locale: locale )
       - if flash.any?
         .row
           .col-md-8.col-md-offset-2
