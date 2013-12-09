@@ -19,7 +19,8 @@ if @include_banners
       width: e.width,
       height: e.height,
       banner: image_url(e.banner.url(:original)),
-      banner_updated_at: e.banner_updated_at
+      banner_updated_at: e.banner_updated_at,
+      guid: e.guid
     } }
   end
 end
