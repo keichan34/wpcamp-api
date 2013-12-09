@@ -1,4 +1,6 @@
 class Banner < ActiveRecord::Base
+  include HasGuid
+
   belongs_to :word_camp
 
   has_attached_file :banner

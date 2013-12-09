@@ -23,6 +23,20 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
+--
+-- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
+
+
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -45,7 +59,8 @@ CREATE TABLE banners (
     banner_file_size integer,
     banner_updated_at timestamp without time zone,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    guid character varying(255)
 );
 
 
@@ -355,3 +370,5 @@ INSERT INTO schema_migrations (version) VALUES ('20131207133702');
 INSERT INTO schema_migrations (version) VALUES ('20131208053639');
 
 INSERT INTO schema_migrations (version) VALUES ('20131208071630');
+
+INSERT INTO schema_migrations (version) VALUES ('20131209134918');
