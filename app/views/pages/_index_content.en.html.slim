@@ -9,6 +9,11 @@ p
   | Use the hostname of this page as the base for all API calls. Note that HTTPS is required, and all non-HTTPS requests will be redirected. Correct example of a full API call:
 pre
   | #{ request.protocol }#{ request.host_with_port }/wordcamps.json
+p
+  | Parameters are URI-encoded and passed as a regular querystring. Here are default parameters that will be accepeted on any request:
+dl.dl-horizontal
+  dt callback
+  dd If "callback" is specified, the response will be wrapped in the callback provided.
 .api-section
   h3
     code

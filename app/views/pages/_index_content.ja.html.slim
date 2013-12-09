@@ -9,6 +9,11 @@ p
   | このページのホスト名をすべての API コールのベースとして使ってください。HTTPS は必須であり、HTTPS ではないリクエストはすべてリダイレクトされます。完全な形の API コール例は以下のとおりです。
 pre
   | #{ request.protocol }#{ request.host_with_port }/wordcamps.json
+p
+  | Parameters are URI-encoded and passed as a regular querystring. Here are default parameters that will be accepeted on any request:
+dl.dl-horizontal
+  dt callback
+  dd If "callback" is specified, the response will be wrapped in the callback provided.
 .api-section
   h3
     code
