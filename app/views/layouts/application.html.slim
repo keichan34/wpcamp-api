@@ -44,7 +44,7 @@ html lang="#{ current_lang }"
                     span.current-lang
                       = t "languages.#{ locale }"
                   - else
-                    = link_to t("languages.#{ locale }"), root_path( locale: locale )
+                    = link_to t("languages.#{ locale }"), root_with_locale_path(locale: locale )
     .container.main-container
       - if flash.any?
         .row
