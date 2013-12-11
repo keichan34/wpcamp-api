@@ -58,7 +58,9 @@ $(document).on 'ready', () ->
 
   current_state_page = 1
 
-  $(window).scroll () ->
+  timeouter = -1
+
+  scrollSampler = () ->
     # Auto replaceState
     if supportsReplaceState
       page = 1
@@ -78,9 +80,25 @@ $(document).on 'ready', () ->
         else
           history.replaceState {}, '', "/page/#{ page }"
 
+        # Google Analytics
+        if window.ga != undefined
+          ga('set', 'location', location.href.split('#')[0])
+          ga('send', 'pageview')
+        else if window._gaq != undefined
+          _gaq.push(['_trackPageview'])
+        else if window.pageTracker != undefined
+          pageTracker._trackPageview()
+
     # Infinite scroll
     if ($load_more.offset().top - window.innerHeight) - window.scrollY <= 500 and !finished
       current_helper next_page
+
+    timeouter = -1
+
+  $(window).scroll () ->
+    if timeouter == -1
+      timeouter = window.setTimeout scrollSampler, 100
+
 
   $query.keyup (e) ->
     val = $query.val()
