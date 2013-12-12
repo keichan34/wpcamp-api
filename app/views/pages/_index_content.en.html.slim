@@ -8,7 +8,7 @@ h2 API Documentation
 p
   | Use the hostname of this page as the base for all API calls. Note that HTTPS is required, and all non-HTTPS requests will be redirected. Correct example of a full API call:
 pre
-  | #{ request.protocol }#{ request.host_with_port }/wordcamps.json
+  | #{ request.protocol }#{ request.host_with_port }/v1/wordcamps.json
 p
   | Parameters are URI-encoded and passed as a regular querystring. Here are default parameters that will be accepeted on any request:
 dl.dl-horizontal
@@ -17,11 +17,11 @@ dl.dl-horizontal
 .api-section
   h3
     code
-      | /wordcamps.json
+      | /v1/wordcamps.json
   p
     ' A basic list of WordCamps. Includes paging metadata. Pages can be specified with the "page" URL parameter:
     code
-      | /wordcamps.json?page=1
+      | /v1/wordcamps.json?page=1
     | .
     | <br>An example response:
   pre
@@ -52,18 +52,18 @@ dl.dl-horizontal
 .api-section
   h3
     code
-      | /wordcamps/search.json?q=[query]
+      | /v1/wordcamps/search.json?q=[query]
   p
     | A very basic search mechanism. Searches through the WordCamp titles and descriptions.
 .api-section
   h3
     code
-      | /wordcamps/location/[location].json
+      | /v1/wordcamps/location/[location].json
   p
     | Returns a list of WordCamps for the given location, sorted in reverse date order (most recent will come first).
   .example
     pre
-      | /wordcamps/location/tokyo.json
+      | /v1/wordcamps/location/tokyo.json
   p
     | Additional attributes that are accepted by this endpoint:
   dl.dl-horizontal
@@ -76,6 +76,6 @@ dl.dl-horizontal
 .api-section
   h3
     code
-      | /wordcamps/:id.json
+      | /v1/wordcamps/:id.json
   p
     | Using the <code>id</code> parameter from the above responses, you can request information about a specific WordCamp. Right now, the response data is the same.

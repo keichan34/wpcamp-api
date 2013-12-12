@@ -1,7 +1,7 @@
 object false
 
 node :wordcamps do
-  partial 'wordcamps/single', object: @wordcamps
+  partial 'v1/wordcamps/single', object: @wordcamps
 end
 
 node :meta do

@@ -1,4 +1,4 @@
-class WordcampsController < ApplicationController
+class V1::WordcampsController < ApplicationController
 
   def index
     @wordcamps = WordCamp.order('start DESC').page params[:page]
@@ -29,7 +29,7 @@ class WordcampsController < ApplicationController
     end
 
     if params[:year]
-      @wordcamps = @wordcamps.where( 'EXTRACT(YEAR FROM"start") = ?', params[:year] )
+      @wordcamps = @wordcamps.where( 'EXTRACT(YEAR FROM "start") = ?', params[:year] )
     end
 
     default_response do

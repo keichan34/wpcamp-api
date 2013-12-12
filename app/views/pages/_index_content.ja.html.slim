@@ -8,7 +8,7 @@ h2 API ドキュメンテーション
 p
   | このページのホスト名をすべての API コールのベースとして使ってください。HTTPS は必須であり、HTTPS ではないリクエストはすべてリダイレクトされます。完全な形の API コール例は以下のとおりです。
 pre
-  | #{ request.protocol }#{ request.host_with_port }/wordcamps.json
+  | #{ request.protocol }#{ request.host_with_port }/v1/wordcamps.json
 p
   | Parameters are URI-encoded and passed as a regular querystring. Here are default parameters that will be accepeted on any request:
 dl.dl-horizontal
@@ -17,11 +17,11 @@ dl.dl-horizontal
 .api-section
   h3
     code
-      | /wordcamps.json
+      | /v1/wordcamps.json
   p
     ' WordCamp の基本的な一覧。ページ送りのメタ情報が含まれる。URL パラメータ "page" でページを指定できる
     code
-      | /wordcamps.json?page=1
+      | /v1/wordcamps.json?page=1
     | .
     | <br>レスポンスの例。
   pre
@@ -52,18 +52,18 @@ dl.dl-horizontal
 .api-section
   h3
     code
-      | /wordcamps/search.json?q=[query]
+      | /v1/wordcamps/search.json?q=[query]
   p
     | とても簡易的な検索メカニズム。WordCamp のタイトルと説明 (英語) を元に検索する。
 .api-section
   h3
     code
-      | /wordcamps/location/[location].json
+      | /v1/wordcamps/location/[location].json
   p
     | Returns a list of WordCamps for the given location, sorted in reverse date order (most recent will come first).
   .example
     pre
-      | /wordcamps/location/tokyo.json
+      | /v1/wordcamps/location/tokyo.json
   p
     | Additional attributes that are accepted by this endpoint:
   dl.dl-horizontal
@@ -76,6 +76,6 @@ dl.dl-horizontal
 .api-section
   h3
     code
-      | /wordcamps/:id.json
+      | /v1/wordcamps/:id.json
   p
     | 上記のレスポンス内の <code>id</code> パラメータを使うことで、特定の WordCamp に関する情報のみをリクエストできる (現時点では ID を指定しない場合と同じレスポンス内容) 。

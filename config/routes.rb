@@ -17,20 +17,27 @@ WpcampApi::Application.routes.draw do
     end
   end
 
-  get '/page/:page' => 'pages#index_page'
 
   scope ":locale", locale: /en|ja/ do
     root to: 'pages#index', as: :root_with_locale
+    get 'page/:page' => 'pages#index_page'
   end
 
   root to: 'pages#redirect_to_current_locale'
 
-  resources :wordcamps, only: [ :show, :index ] do
-    collection do
-      get 'search'
 
-      get 'location/:location', action: :location
+  # API routes
+
+  namespace :v1 do
+
+    resources :wordcamps, only: [ :show, :index ] do
+      collection do
+        get 'search'
+
+        get 'location/:location', action: :location
+      end
     end
+
   end
 
 end

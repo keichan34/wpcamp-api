@@ -4,6 +4,7 @@ $(document).on 'ready', () ->
   $wordcamps = $ '#wordcamps'
   $load_more = $ '#load-more'
   $query     = $ '#query'
+  path_root  = "/#{$('html').attr 'lang'}"
 
   return if $wordcamps.length == 0
 
@@ -15,10 +16,10 @@ $(document).on 'ready', () ->
     next_page = Math.max next_page, parseInt($(this).data('page')) + 1
 
   load_page = (pageno = 1, async = true) ->
-    load_page_with_helper Routes.wordcamps_path, {}, pageno, async
+    load_page_with_helper Routes.v1_wordcamps_path, {}, pageno, async
 
   load_search_page = (pageno = 1, async = true) ->
-    load_page_with_helper Routes.search_wordcamps_path, {q: $query.val()}, pageno, async
+    load_page_with_helper Routes.search_v1_wordcamps_path, {q: $query.val()}, pageno, async
 
   load_page_with_helper = (helper, args = {}, pageno = 1, async = true) ->
     _args = $.extend { format: 'json', page: pageno }, args
@@ -76,9 +77,9 @@ $(document).on 'ready', () ->
       if page != current_state_page
         current_state_page = page
         if page == 1
-          history.replaceState {}, '', '/'
+          history.replaceState {}, '', path_root
         else
-          history.replaceState {}, '', "/page/#{ page }"
+          history.replaceState {}, '', path_root + "/page/#{ page }"
 
         # Google Analytics
         if window.ga != undefined
