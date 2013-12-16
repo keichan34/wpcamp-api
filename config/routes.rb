@@ -32,6 +32,8 @@ WpcampApi::Application.routes.draw do
 
     resources :wordcamps, only: [ :show, :index ] do
       collection do
+        get 'list'
+
         get 'search'
 
         get 'location/:location', action: :location

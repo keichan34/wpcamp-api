@@ -6,6 +6,14 @@ class V1::WordcampsController < ApplicationController
     default_response
   end
 
+  def list
+    @wordcamps = Rails.cache.fetch :wordcamps_list, expires_in: 15.minutes do
+      WordCamp.group('"title_for_slug", "title"').order('title').select(:title_for_slug, :title).load
+    end
+
+    default_response
+  end
+
   def show
     @wordcamp = WordCamp.find params[:id]
 

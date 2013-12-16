@@ -30,7 +30,7 @@ GEM
       activemodel
       fog (>= 1.8.0)
     atomic (1.1.14)
-    aws-sdk (1.29.1)
+    aws-sdk (1.30.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
@@ -41,7 +41,7 @@ GEM
       jquery-rails
       rails (>= 3.1)
     builder (3.1.4)
-    byebug (2.4.1)
+    byebug (2.5.0)
       columnize (~> 0.3.6)
       debugger-linecache (~> 1.2.0)
     climate_control (0.0.3)
@@ -117,9 +117,9 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
     newrelic_rpm (3.7.0.177)
-    nokogiri (1.6.0)
+    nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
-    oj (2.3.0)
+    oj (2.4.2)
     orm_adapter (0.5.0)
     paperclip (3.5.2)
       activemodel (>= 3.0.0)
@@ -400,7 +400,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.38)
-    uglifier (2.3.2)
+    uglifier (2.3.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     unf (0.1.3)
