@@ -8,7 +8,15 @@ class V1::WordcampsController < ApplicationController
 
   def list
     @wordcamps = Rails.cache.fetch :wordcamps_list, expires_in: 15.minutes do
-      WordCamp.group('"title_for_slug", "title"').order('title').select(:title_for_slug, :title).load
+      WordCamp.group('"title_for_slug", "title", "year"') \
+      .order('title').select(:title_for_slug, :title, 'EXTRACT(YEAR FROM "start") AS "year"') \
+      .group_by { |e| e.title_for_slug }.map do |k, v|
+        {
+          name: v.first.title,
+          title_for_slug: v.first.title_for_slug,
+          years: v.map { |e| e.year.to_i }
+        }
+      end
     end
 
     default_response

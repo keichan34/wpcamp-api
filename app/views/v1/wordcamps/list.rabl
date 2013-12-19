@@ -1,7 +1,7 @@
 object false
 
 node :wordcamps do
-  @wordcamps.map { |e| { title: e.title, slug: e.title_for_slug } }
+  @wordcamps
 end
 
 node :meta do
