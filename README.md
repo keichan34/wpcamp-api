@@ -1,10 +1,16 @@
 # WordCamp API
 
+Publicly hosted here: [https://wpcamp-api.herokuapp.com](https://wpcamp-api.herokuapp.com). This service / project is run as a hobby. Your code contributions / donations are very welcome!
+
 Gathers data from the [WordCamp Central](http://central.wordcamp.org/) [feed](http://central.wordcamp.org/feed/), and provides it in a nice JSON (or JSONP, if you so desire) format.
 
 Includes goodies like banner images, for use in your theme!
 
-There is a companion widget plugin planned, look out for that!
+[There is a companion widget plugin in development](https://github.com/keichan34/wpcamp-widget-plugin).
+
+## Warning
+
+This API is in an early beta stage, and still in the development process. Some endpoints and / or return values may change with no warning. I aim to keep the [English front page](https://wpcamp-api.herokuapp.com/en) as up-to-date as possible, but this may lag behind. There will be an 1.0 release, with the API frozen (barring bugfixes), but there is no ETA on that at the moment.
 
 # Contributing
 
