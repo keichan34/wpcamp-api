@@ -24,6 +24,13 @@ $brand-primary: #146a7e;
 
 @import "examples";
 
+::selection {
+  background: #73c3d9;
+  }
+::-moz-selection {
+  background: #73c3d9;
+}
+
 #github-banner {
   position: fixed;
   top: 0;
